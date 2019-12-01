@@ -63,7 +63,7 @@ if (isDeveloping) {
       {
         eventName: "Second Event of the Day ()",
         eventDescription: "Some description",
-        eventDate: "2019-12-041T18:30:00.000Z",
+        eventDate: "2019-12-04T18:30:00.000Z",
         eventDuration: 60
       }
     ]));

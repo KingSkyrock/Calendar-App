@@ -4,8 +4,7 @@ import styles from './App.css';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import EventUI from './eventMakerUI.js';
-
-
+import DateCell from './DateCell.js';
 
 export default class Month extends React.Component {
   constructor(props) {
@@ -27,53 +26,23 @@ export default class Month extends React.Component {
     this.firstDay = new Date(date.getFullYear(), this.props.wantedMonth, 1).getDay();
     this.lastDay = new Date(date.getFullYear(), this.props.wantedMonth+1, 0).getDate();
     var arr = [];
-    switch(this.firstDay) {
-      case 0:
-        arr.push('1')
-      break;
-      case 1:
-        arr.push('')
-        arr.push(1)
-      break;
-      case 2:
-        arr.push('')
-        arr.push('')
-        arr.push(1)
-      break;
-      case 3:
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push(1)
-      break;
-      case 4:
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push(1)
-      break;
-      case 5:
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push(1)
-      break;
-      case 6:
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push('')
-        arr.push(1)
-      break;
+
+    for (var i = 0; i < this.firstDay; i++) {
+      arr.push(<DateCell dateDisplay={""} />)
     }
-    for (var i = 2; i <= this.lastDay; i++) {
-      arr.push(i)
+
+    for (var i = 1; i <= this.lastDay; i++) {
+      var cellEvents = [];
+
+      for (var eventIndex in this.props.events) {
+        var eventDate = new Date(this.props.events[eventIndex].eventDate);
+        if (eventDate.getDate() == i && eventDate.getMonth() == this.props.wantedMonth) {
+          cellEvents.push(this.props.events[eventIndex]);
+        }
+      }
+      arr.push(<DateCell dateDisplay={i} events={cellEvents} />)
     }
+
     return arr;
   }
 
