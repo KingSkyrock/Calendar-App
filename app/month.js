@@ -240,38 +240,44 @@ export default class Month extends React.Component {
           </div>
         </Modal>
         <div className={styles["month-name"]}>
-          <FontAwesomeIcon onClick={() => {this.props.backMonth()}} icon={faAngleLeft} style={{fontSize: '50px', verticalAlign: '0px', float: 'left', marginLeft: '2%'}} />
+          <div onClick={this.props.backMonth} className={styles["left-arrow"]}>
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </div>
           {this.getMonthName(this.props.wantedMonth)} {this.props.wantedYear}
-          <FontAwesomeIcon onClick={() => {this.props.forwardMonth()}} icon={faAngleRight} style={{fontSize: '50px', verticalAlign: '0px', float: 'right', marginRight: '2%'}} />
+          <div onClick={this.props.forwardMonth} className={styles["right-arrow"]}>
+            <FontAwesomeIcon icon={faAngleRight} />
+          </div>
         </div>
-        <table className={styles["calendar-table"]}>
-          <tbody style={{height: '100%'}}>
-            <tr>
-                {/*firstweek is special because the first day of the month can start on any day in the first week.*/}
-              <th> Sunday </th> <th> Monday </th> <th> Tuesday </th> <th> Wednesday </th> <th> Thursday </th> <th> Friday </th> <th> Saturday </th>
-            </tr>
-            <tr >
-              <td onDoubleClick={() => this.addEvent(0)}> {this.month()[0]} </td> <td onDoubleClick={() => this.addEvent(1)}> {this.month()[1]}  </td> <td onDoubleClick={() => this.addEvent(2)}> {this.month()[2]} </td> <td onDoubleClick={() => this.addEvent(3)}> {this.month()[3]} </td> <td onDoubleClick={() => this.addEvent(4)}> {this.month()[4]} </td> <td onDoubleClick={() => this.addEvent(5)}> {this.month()[5]} </td> <td onDoubleClick={() => this.addEvent(6)}> {this.month()[6]} </td>
-            </tr>
-            <tr>
-              <td onDoubleClick={() => this.addEvent(7)}> {this.month()[7]} </td> <td onDoubleClick={() => this.addEvent(8)}> {this.month()[8]}  </td> <td onDoubleClick={() => this.addEvent(9)}> {this.month()[9]} </td> <td onDoubleClick={() => this.addEvent(10)}> {this.month()[10]} </td> <td onDoubleClick={() => this.addEvent(11)}> {this.month()[11]} </td> <td onDoubleClick={() => this.addEvent(12)}> {this.month()[12]} </td> <td onDoubleClick={() => this.addEvent(13)}> {this.month()[13]} </td>
-            </tr>
-            <tr>
-              <td onDoubleClick={() => this.addEvent(14)}> {this.month()[14]} </td> <td onDoubleClick={() => this.addEvent(15)}> {this.month()[15]}  </td> <td onDoubleClick={() => this.addEvent(16)}> {this.month()[16]} </td> <td onDoubleClick={() => this.addEvent(17)}> {this.month()[17]} </td> <td onDoubleClick={() => this.addEvent(18)}> {this.month()[18]} </td> <td onDoubleClick={() => this.addEvent(19)}> {this.month()[19]} </td> <td onDoubleClick={() => this.addEvent(20)}> {this.month()[20]} </td>
-            </tr>
-            <tr>
-              <td onDoubleClick={() => this.addEvent(21)}> {this.month()[21]} </td> <td onDoubleClick={() => this.addEvent(22)}> {this.month()[22]}  </td> <td onDoubleClick={() => this.addEvent(23)}> {this.month()[23]} </td> <td onDoubleClick={() => this.addEvent(24)}> {this.month()[24]} </td> <td onDoubleClick={() => this.addEvent(25)}> {this.month()[25]} </td> <td onDoubleClick={() => this.addEvent(26)}> {this.month()[26]} </td> <td onDoubleClick={() => this.addEvent(27)}> {this.month()[27]} </td>
-            </tr>
-            <tr>
-              <td onDoubleClick={() => this.addEvent(28)}> {this.month()[28]} </td> <td onDoubleClick={() => this.addEvent(29)}> {this.month()[29]}  </td> <td onDoubleClick={() => this.addEvent(30)}> {this.month()[30]} </td> <td onDoubleClick={() => this.addEvent(31)}> {this.month()[31]} </td> <td onDoubleClick={() => this.addEvent(32)}> {this.month()[32]} </td> <td onDoubleClick={() => this.addEvent(33)}> {this.month()[33]} </td> <td onDoubleClick={() => this.addEvent(34)}> {this.month()[34]} </td>
-            </tr>
-            { (this.firstDay == 5 && this.lastDay >= 31 || this.firstDay == 6 && this.lastDay >= 30) &&
+        <div className={styles["table-wrapper"]}>
+          <table className={styles["calendar-table"]}>
+            <tbody style={{height: '100%'}}>
               <tr>
-                <td onDoubleClick={() => this.addEvent(35)}> {this.month()[35]} </td> <td onDoubleClick={() => this.addEvent(36)}> {this.month()[36]}  </td> <td onDoubleClick={() => this.addEvent(37)}> {this.month()[37]} </td> <td onDoubleClick={() => this.addEvent(38)}> {this.month()[38]} </td> <td onDoubleClick={() => this.addEvent(39)}> {this.month()[39]} </td> <td onDoubleClick={() => this.addEvent(40)}> {this.month()[40]} </td> <td onDoubleClick={() => this.addEvent(41)}> {this.month()[41]} </td>
+                  {/*firstweek is special because the first day of the month can start on any day in the first week.*/}
+                <th> Sun </th> <th> Mon </th> <th> Tue </th> <th> Wed </th> <th> Thu </th> <th> Fri </th> <th> Sat </th>
               </tr>
-            }
-          </tbody>
-        </table>
+              <tr >
+                <td onDoubleClick={() => this.addEvent(0)}> {this.month()[0]} </td> <td onDoubleClick={() => this.addEvent(1)}> {this.month()[1]}  </td> <td onDoubleClick={() => this.addEvent(2)}> {this.month()[2]} </td> <td onDoubleClick={() => this.addEvent(3)}> {this.month()[3]} </td> <td onDoubleClick={() => this.addEvent(4)}> {this.month()[4]} </td> <td onDoubleClick={() => this.addEvent(5)}> {this.month()[5]} </td> <td onDoubleClick={() => this.addEvent(6)}> {this.month()[6]} </td>
+              </tr>
+              <tr>
+                <td onDoubleClick={() => this.addEvent(7)}> {this.month()[7]} </td> <td onDoubleClick={() => this.addEvent(8)}> {this.month()[8]}  </td> <td onDoubleClick={() => this.addEvent(9)}> {this.month()[9]} </td> <td onDoubleClick={() => this.addEvent(10)}> {this.month()[10]} </td> <td onDoubleClick={() => this.addEvent(11)}> {this.month()[11]} </td> <td onDoubleClick={() => this.addEvent(12)}> {this.month()[12]} </td> <td onDoubleClick={() => this.addEvent(13)}> {this.month()[13]} </td>
+              </tr>
+              <tr>
+                <td onDoubleClick={() => this.addEvent(14)}> {this.month()[14]} </td> <td onDoubleClick={() => this.addEvent(15)}> {this.month()[15]}  </td> <td onDoubleClick={() => this.addEvent(16)}> {this.month()[16]} </td> <td onDoubleClick={() => this.addEvent(17)}> {this.month()[17]} </td> <td onDoubleClick={() => this.addEvent(18)}> {this.month()[18]} </td> <td onDoubleClick={() => this.addEvent(19)}> {this.month()[19]} </td> <td onDoubleClick={() => this.addEvent(20)}> {this.month()[20]} </td>
+              </tr>
+              <tr>
+                <td onDoubleClick={() => this.addEvent(21)}> {this.month()[21]} </td> <td onDoubleClick={() => this.addEvent(22)}> {this.month()[22]}  </td> <td onDoubleClick={() => this.addEvent(23)}> {this.month()[23]} </td> <td onDoubleClick={() => this.addEvent(24)}> {this.month()[24]} </td> <td onDoubleClick={() => this.addEvent(25)}> {this.month()[25]} </td> <td onDoubleClick={() => this.addEvent(26)}> {this.month()[26]} </td> <td onDoubleClick={() => this.addEvent(27)}> {this.month()[27]} </td>
+              </tr>
+              <tr>
+                <td onDoubleClick={() => this.addEvent(28)}> {this.month()[28]} </td> <td onDoubleClick={() => this.addEvent(29)}> {this.month()[29]}  </td> <td onDoubleClick={() => this.addEvent(30)}> {this.month()[30]} </td> <td onDoubleClick={() => this.addEvent(31)}> {this.month()[31]} </td> <td onDoubleClick={() => this.addEvent(32)}> {this.month()[32]} </td> <td onDoubleClick={() => this.addEvent(33)}> {this.month()[33]} </td> <td onDoubleClick={() => this.addEvent(34)}> {this.month()[34]} </td>
+              </tr>
+              { (this.firstDay == 5 && this.lastDay >= 31 || this.firstDay == 6 && this.lastDay >= 30) &&
+                <tr>
+                  <td onDoubleClick={() => this.addEvent(35)}> {this.month()[35]} </td> <td onDoubleClick={() => this.addEvent(36)}> {this.month()[36]}  </td> <td onDoubleClick={() => this.addEvent(37)}> {this.month()[37]} </td> <td onDoubleClick={() => this.addEvent(38)}> {this.month()[38]} </td> <td onDoubleClick={() => this.addEvent(39)}> {this.month()[39]} </td> <td onDoubleClick={() => this.addEvent(40)}> {this.month()[40]} </td> <td onDoubleClick={() => this.addEvent(41)}> {this.month()[41]} </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </React.Fragment>
     );
   }

@@ -32,25 +32,27 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <div id={styles.layout}>
         <Month
-          style={{height: '100%'}}
           wantedMonth={this.state.selectedMonth}
           wantedYear={this.state.selectedYear}
           updateEvents={() => {
             this._fetchEvents()
           }}
-          backMonth={() => {
-            this._changeMonth(false)
+          backMonth={(evt) => {
+            evt.preventDefault();
+            evt.stopPropagation();
+            this._changeMonth(false);
           }}
-          forwardMonth={() => {
+          forwardMonth={(evt) => {
+            evt.preventDefault();
+            evt.stopPropagation();
             this._changeMonth(true)
           }}
           holidays={this.state.loadedHolidays}
           events={this.state.loadedEvents}
         />
-        <div style={{textAlign: 'center'}}>Double-click on a day to add an event!</div>
-      </React.Fragment>
+      </div>
     );
   }
   _changeMonth(up) {
