@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from './month.css';
+import styles from './month.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Modal from 'react-modal'
