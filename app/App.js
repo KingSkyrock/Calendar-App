@@ -12,54 +12,64 @@ export default class App extends React.Component {
 
     this.state = {
       started: false,
-      currentSelectedMonth: new Date().getMonth(),
-      loadedEvents: null
+      selectedMonth: new Date().getMonth(),
+      selectedYear: new Date().getFullYear(),
+      loadedEvents: null,
+      loadedHolidays: null
     };
   }
 
+  componentDidMount() {
+    this.setState({started: true});
+  }
+
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentSelectedMonth != this.state.currentSelectedMonth || prevState.started != this.state.started) {
+    if (prevState.selectedMonth != this.state.selectedMonth || prevState.started != this.state.started) {
       this._fetchEvents();
+      this._fetchHolidays();
     }
   }
 
   render() {
     return (
-      <div style={{textAlign: 'center'}}>
-        {this.state.started ?
-          <div>
-            <button onClick={() => {this._changeMonth(false)}}>Back</button>
-            <button onClick={() => {this._changeMonth(true)}}>Next</button>
-            <Month
-              wantedMonth={this.state.currentSelectedMonth}
-              events={this.state.loadedEvents}
-            />
-            <lable>Click on a day to add an event!</lable>
-          </div>
-        :
-          <div>
-            <button onClick={() => this._start()}>Start the Calendar (this will be replaced with logging in)</button>
-          </div>
-        }
-      </div>
+      <React.Fragment>
+        <Month
+          style={{height: '100%'}}
+          wantedMonth={this.state.selectedMonth}
+          wantedYear={this.state.selectedYear}
+          updateEvents={() => {
+            this._fetchEvents()
+          }}
+          backMonth={() => {
+            this._changeMonth(false)
+          }}
+          forwardMonth={() => {
+            this._changeMonth(true)
+          }}
+          holidays={this.state.loadedHolidays}
+          events={this.state.loadedEvents}
+        />
+        <div style={{textAlign: 'center'}}>Double-click on a day to add an event!</div>
+      </React.Fragment>
     );
   }
-
-  _start() {
-    this.setState({started: true});
-  }
-
   _changeMonth(up) {
-    if (up && this.state.currentSelectedMonth != 11) {
+    if (up && this.state.selectedMonth != 11) {
       this.setState({
-        currentSelectedMonth: this.state.currentSelectedMonth + 1
+        selectedMonth: this.state.selectedMonth + 1
       });
-    } else if (!up && this.state.currentSelectedMonth != 0) {
-      this.setState({currentSelectedMonth: this.state.currentSelectedMonth - 1});
-    } else if (!up && this.state.currentSelectedMonth == 0) {
-      this.setState({currentSelectedMonth: 11});
-    } else if (up && this.state.currentSelectedMonth == 11) {
-      this.setState({currentSelectedMonth: 0});
+    } else if (!up && this.state.selectedMonth != 0) {
+      this.setState({
+        selectedMonth: this.state.selectedMonth - 1
+      });
+    } else if (!up && this.state.selectedMonth == 0) {
+      this.setState({
+        selectedMonth: 11, selectedYear: this.state.selectedYear - 1
+      });
+    } else if (up && this.state.selectedMonth == 11) {
+      this.setState({
+        selectedMonth: 0, selectedYear: this.state.selectedYear + 1
+      });
     }
   }
 
@@ -67,6 +77,14 @@ export default class App extends React.Component {
     axios.get('/events').then((res) => {
       this.setState({
         loadedEvents: res.data
+      })
+    });
+  }
+
+  _fetchHolidays() {
+    axios.get('/holidays', { params: { year: this.state.selectedYear} }).then((res) => {
+      this.setState({
+        loadedHolidays: res.data
       })
     });
   }

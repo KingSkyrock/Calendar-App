@@ -1,0 +1,14 @@
+.holiday {
+  font-size: 10px;
+  background: #96d1e0;
+  padding: 3px;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0px 0px 3px 0px;
+  width: 50%;
+  height: 15%;
+  display: inline-block;
+  text-align: center;
+}

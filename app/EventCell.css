@@ -1,0 +1,66 @@
+.event {
+  font-size: 10px;
+  background: #b2bdec;
+  padding: 3px;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0px 0px 3px 0px;
+  width: 50%;
+  height: 15%;
+  display: inline-block;
+  text-align: center;
+}
+.submit-button {
+  border-radius: 100px;
+  padding: 10px;
+  border: 0px solid white;
+}
+
+.submit-button:hover {
+  background-color: lightblue;
+}
+
+.exit-button {
+  top: 0px;
+  right: 0px;
+  position: absolute;
+  border-radius: 100px;
+  padding: 10px;
+  border: 0px solid white;
+  background-color: white;
+  font-size: 20px;
+  width: 5%;
+  height: 10%;
+  color: gray;
+}
+.exit-button:hover {
+  background-color: lightblue;
+  color: black;
+}
+
+input {
+  border: 0px solid white;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 2px;
+}
+.hour-select {
+  border: 0px solid white;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 2px;
+}
+
+.button {
+  border-radius: 100px;
+  padding: 10px;
+  border: 0px solid white;
+}
+
+.button:hover {
+  background-color: lightblue;
+}
