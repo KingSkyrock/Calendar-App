@@ -7,10 +7,15 @@
   overflow: hidden;
   white-space: nowrap;
   margin: 0px 0px 3px 0px;
-  width: 50%;
   height: 15%;
   display: inline-block;
   text-align: center;
+  box-sizing: border-box;
+  width: 75%;
+  overflow: hidden;
+}
+.event:hover {
+  background: #a8b3e2;
 }
 .submit-button {
   border-radius: 100px;
@@ -23,7 +28,7 @@
 }
 
 .exit-button {
-  top: 0px;
+  top: -5px;
   right: 0px;
   position: absolute;
   border-radius: 100px;
@@ -31,8 +36,8 @@
   border: 0px solid white;
   background-color: white;
   font-size: 20px;
-  width: 5%;
-  height: 10%;
+  width: 43px;
+  height: 43px;
   color: gray;
 }
 .exit-button:hover {
@@ -40,7 +45,7 @@
   color: black;
 }
 
-input {
+input, textarea {
   border: 0px solid white;
   background-color: #f4f4f4;
   border-radius: 5px;
@@ -53,6 +58,7 @@ input {
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 2px;
+  width: 87.5px;
 }
 
 .button {

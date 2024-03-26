@@ -18,9 +18,11 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
-    paddingTop: '0px',
-    height: '60%',
-    width: '50%'
+    paddingTop: '20px',
+    paddingLeft: '50px',
+    height: '65%',
+    width: '22%',
+    minWidth: '350px'
   }
 };
 Modal.setAppElement('#root');
@@ -32,6 +34,7 @@ export default class Month extends React.Component {
     this.firstDay = null;
     this.lastDay = null;
     this.date = new Date();
+    this.titleInput = React.createRef();
 
     this.state = {
       events: this.events,
@@ -49,7 +52,7 @@ export default class Month extends React.Component {
   }
 
   afterOpenEventModal() {
-    console.log("open")
+    this.titleInput.focus();
   }
 
   closeEventModal() {
@@ -185,17 +188,21 @@ export default class Month extends React.Component {
           contentLabel="Event Modal"
         >
           <div style={{position: 'relative'}}>
-            <h1>Create Event</h1>
+            <h1 style={{fontSize: '25px', marginBottom: '30px'}}>Create Event</h1>
             <button onClick={() => this.setState({eventModalOpen: false})} className={styles["exit-button"]}>X</button>
-            <form style={{fontSize: '20px'}} onSubmit={(event) => this.createEvent(event)}>
-              <span style={{fontSize: '20px'}}>Date: {new Date(this.state.eventDate).toLocaleDateString()}</span>
+            <form style={{fontSize: '15px'}} onSubmit={(event) => this.createEvent(event)}>
+              <label style={{fontSize: '19px'}}>Title: </label>
+              <br />
+              <input style={{fontSize: '17px', width: "250px"}} ref={(el) => { this.titleInput = el }} type="text" id="name"></input>
               <br />
               <br />
-              <label>Event Name: </label>
-              <input type="text" id="name"></input>
+              <label>Description: </label>
               <br />
-              <label>Event Description: </label>
-              <input type="text" id="description"></input>
+              <textarea style={{width: "250px"}} type="text" id="description"></textarea>
+              <br />
+              <br />
+              <span>Date: {new Date(this.state.eventDate).toLocaleDateString()}</span>
+              <br />
               <br />
               <h3>Event Time: </h3>
               <label>Hour: </label>
@@ -230,8 +237,8 @@ export default class Month extends React.Component {
               <input type="number" min="0" max="59" id="minutes"></input>
               <br />
               <br />
-              <label> Event Duration (minutes): </label>
-              <input min="0" id="duration"></input>
+              <label> Duration (minutes): </label>
+              <input style={{width: "30px"}} min="0" id="duration"></input>
               <br />
               <br />
               <input className={styles["submit-button"]} type="submit" value="Create!"></input>
@@ -243,6 +250,7 @@ export default class Month extends React.Component {
           <div onClick={this.props.backMonth} className={styles["left-arrow"]}>
             <FontAwesomeIcon icon={faAngleLeft} />
           </div>
+          <button onClick={this.props.todayMonth} className={styles["today-button"]}>Today</button>
           {this.getMonthName(this.props.wantedMonth)} {this.props.wantedYear}
           <div onClick={this.props.forwardMonth} className={styles["right-arrow"]}>
             <FontAwesomeIcon icon={faAngleRight} />
@@ -289,6 +297,7 @@ Month.propTypes = {
   updateEvents: PropTypes.func.isRequired,
   backMonth: PropTypes.func.isRequired,
   forwardMonth: PropTypes.func.isRequired,
+  todayMonth: PropTypes.func.isRequired,
   events: PropTypes.arrayOf(PropTypes.shape({
     eventId: PropTypes.number,
     eventName: PropTypes.string,

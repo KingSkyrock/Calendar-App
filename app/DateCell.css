@@ -1,0 +1,35 @@
+.day {
+  position: absolute;
+  top: 0px;
+  text-align: center;
+  left: 0px;
+  right: 0px;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.today {
+  background-color: #2E97F5;
+  border-radius: 100px;
+  padding: 5px;
+}
+
+.moreEvt {
+  font-size: 10px;
+  background: #ffffff;
+  padding: 3px;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0px 0px 3px 0px;
+  height: 15%;
+  display: inline-block;
+  text-align: center;
+  box-sizing: border-box;
+  width: 75%;
+  overflow: hidden;
+}
+.moreEvt:hover {
+  background: #dddddd;
+}

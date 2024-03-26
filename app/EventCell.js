@@ -16,7 +16,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
-    width: '25%',
+    width: '50px',
+    minWidth: '300px',
     height: '25%'
   }
 };
@@ -30,14 +31,17 @@ const customStyles2 = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     paddingTop: '0px',
-    height: '60%',
-    width: '50%'
+    height: '65%',
+    width: '350px',
+    minWidth: '50px'
   }
 };
 
 export default class EventCell extends React.Component {
   constructor(props) {
     super(props);
+
+    this.titleInput = React.createRef();
 
     this.state = {
       eventModalOpen: false
@@ -69,7 +73,7 @@ export default class EventCell extends React.Component {
   }
 
   afterOpenEditModal() {
-    console.log("open")
+    this.titleInput.focus();
   }
 
   closeEditModal() {
@@ -105,7 +109,8 @@ export default class EventCell extends React.Component {
   }
 
   deleteEvent() {
-    this.setState({editModalOpen: false});
+    this.setState({eventModalOpen: false, editModalOpen: false });
+
     if (confirm('Are you sure you want to delete this event?')) {
       axios.post('/deleteEvent', this.props.event.id).then((res) => {
         this.props.updateEvents();
@@ -114,14 +119,19 @@ export default class EventCell extends React.Component {
     }
   }
 
+  zeroAdd(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+
+
   render() {
     return (
       <React.Fragment>
         <div onClick={this.openEventModal} className={styles.event}>
           {this.props.event &&
-            <div>
+            <React.Fragment>
               {this.props.event.eventName}
-            </div>
+            </React.Fragment>
           }
         </div>
 
@@ -138,11 +148,13 @@ export default class EventCell extends React.Component {
                 <button onClick={() => this.editEvent()} className={styles.button} style={{ top: 3, left: 2, position: 'absolute', borderRadius: '10px'}}>Edit</button>
                 <button onClick={() => this.deleteEvent()} className={styles.button} style={{ top: 3, left: 50, position: 'absolute', borderRadius: '10px'}}>Delete</button>
                 <h2>{this.props.event.eventName}</h2>
-                <span>{new Date(this.props.event.eventDate).toLocaleDateString()}</span>
+                <span>On {new Date(this.props.event.eventDate).toLocaleDateString()}</span>
                 <br />
-                <span>{new Date(this.props.event.eventDate).getHours()}:{new Date(this.props.event.eventDate).getMinutes()}</span>
+                <span>Event takes place at {new Date(this.props.event.eventDate).getHours() > 12 ? new Date(this.props.event.eventDate).getHours() - 12 : new Date(this.props.event.eventDate).getHours()}:{this.zeroAdd(new Date(this.props.event.eventDate).getMinutes())} {new Date(this.props.event.eventDate).getHours() > 12 ? 'PM' : 'AM'}</span>
+                <br />
                 <br />
                 <span>{this.props.event.eventDescription}</span>
+                <br />
                 <br />
                 <span>Event lasts for {this.props.event.eventDuration} minutes.</span>
               </div>
@@ -156,17 +168,20 @@ export default class EventCell extends React.Component {
               contentLabel="Edit Modal"
             >
               <div style={{position: 'relative'}}>
-                <h1>Edit Event</h1>
+                <h1 style={{fontSize: '25px', marginBottom: '30px'}}>Edit Event</h1>
                 <button onClick={() => this.setState({editModalOpen: false})} className={styles["exit-button"]}>X</button>
-                <form style={{fontSize: '20px'}} onSubmit={(event) => this.submitEventEdits(event)}>
-                  <span style={{fontSize: '20px'}}>Date: {new Date(this.props.event.eventDate).toLocaleDateString()}</span>
+                <form style={{fontSize: '15px'}} onSubmit={(event) => this.submitEventEdits(event)}>
+                  <label style={{fontSize: '19px'}}>Title: </label>
+                  <br />
+                  <input style={{fontSize: '17px', width: "250px"}} ref={(el) => { this.titleInput = el }} defaultValue={this.props.event.eventName} type="text" id="name"></input>
                   <br />
                   <br />
-                  <label>Event Name: </label>
-                  <input defaultValue={this.props.event.eventName} type="text" id="name"></input>
+                  <label>Description: </label>
                   <br />
-                  <label>Event Description: </label>
-                  <input defaultValue={this.props.event.eventDescription} type="text" id="description"></input>
+                  <textarea style={{width: "250px"}} defaultValue={this.props.event.eventDescription} type="text" id="description"></textarea>
+                  <br />
+                  <br />
+                  <span style={{fontSize: '15px'}}>Date: {new Date(this.props.event.eventDate).toLocaleDateString()}</span>
                   <br />
                   <h3>Event Time: </h3>
                   <label>Hour: </label>
@@ -201,8 +216,8 @@ export default class EventCell extends React.Component {
                   <input defaultValue={new Date(this.props.event.eventDate).getMinutes()} type="number" min="0" max="59" id="minutes"></input>
                   <br />
                   <br />
-                  <label> Event Duration (minutes): </label>
-                  <input defaultValue={this.props.event.eventDuration} min="0" id="duration"></input>
+                  <label>Duration (minutes): </label>
+                  <input style={{width: "30px"}} defaultValue={this.props.event.eventDuration} min="0" id="duration"></input>
                   <br />
                   <br />
                   <input className={styles["submit-button"]} type="submit" value="Submit edits"></input>

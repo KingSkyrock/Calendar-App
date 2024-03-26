@@ -64,11 +64,14 @@
   padding-right: 1px;
   padding-bottom: 1px;
   box-sizing: border-box;
+  display: table
 }
 
 .calendar-table {
   margin: auto;
   display: table;
+  table-layout: fixed;
+  nowrap: nowrap;
   justify-content: center;
   text-align: center;
   height: 100%;
@@ -89,9 +92,12 @@
   td {
     border: 0.5px solid black;
     width: 14.285%;
+    max-height: 16.7%;
+    min-height: 16.7%;
     height: 16.7%;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
   }
 }
 
@@ -99,19 +105,14 @@
   border-radius: 100px;
   padding: 10px;
   border: 0px solid white;
-}
 
-.submit-button {
-  border-radius: 100px;
-  padding: 10px;
-  border: 0px solid white;
-}
-.submit-button:hover {
-  background-color: lightblue;
+  &:hover {
+    background-color: lightblue;
+  }
 }
 
 .exit-button {
-  top: 0px;
+  top: -5px;
   right: 0px;
   position: absolute;
   border-radius: 100px;
@@ -119,26 +120,53 @@
   border: 0px solid white;
   background-color: white;
   font-size: 20px;
-  width: 5%;
-  height: 10%;
+  width: 43px;
+  height: 43px;
   color: gray;
-}
-.exit-button:hover {
-  background-color: lightblue;
-  color: black;
+
+  &:hover {
+    background-color: lightblue;
+    color: black;
+  }
 }
 
-input {
+.today-button {
+  position: absolute;
+  top: 37px;
+  left: 60px;
+  color: gray;
+  border: 0.25px solid lightgray;
+  background-color: #f4f4f4;
+
+  width: 60px;
+  height: 30px;
+  border-radius: 25px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lightblue;
+    color: black;
+    border-color: gray;
+  }
+}
+
+input, textarea {
   border: 0px solid white;
   background-color: #f4f4f4;
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 2px;
+  resize: none;
 }
+input:focus, button:focus, textarea:focus, select:focus{
+  outline: none;
+}
+
 .hour-select {
   border: 0px solid white;
   background-color: #f4f4f4;
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 2px;
+  width: 87.5px;
 }

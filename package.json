@@ -1,23 +1,8 @@
 {
-  "name": "webpack-express-boilerplate",
+  "name": "Calendar App",
   "version": "0.1.0",
-  "description": "A boilerplate for running a Webpack workflow in Node express",
+  "description": "A basic calendar",
   "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate.git"
-  },
-  "keywords": [
-    "express",
-    "webpack",
-    "node"
-  ],
-  "author": "Christian Alfoni",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate/issues"
-  },
-  "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
   "scripts": {
     "test": "",
     "start": "node server",
@@ -36,7 +21,7 @@
     "datejs": "^1.0.0-rc3",
     "formidable": "^1.2.1",
     "lune": "^0.4.0",
-    "react": "^16.2.0",
+    "react": "^16.3.0",
     "react-dom": "^16.2.1",
     "react-modal": "^3.11.1",
     "sqlite3": "^4.1.0"

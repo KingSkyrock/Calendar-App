@@ -247,7 +247,7 @@ if (isDeveloping) {
       {
         holidayDate: `${req.query.year}-${zeroAdd(easter.getMonth()+1)}-${zeroAdd(easter.getDate())}T00:00`,
         holidayName: 'Easter',
-        holidayDescription: 'coming soon',
+        holidayDescription: 'Easter is a holiday commemorating the resurrection of Jesus from the dead. It is usually celebrated with Easter eggs.',
         holidayDuration: 1440
       },
       {

@@ -49,6 +49,12 @@ export default class App extends React.Component {
             evt.stopPropagation();
             this._changeMonth(true)
           }}
+          todayMonth={() => {
+            this.setState({
+              selectedMonth: new Date().getMonth(),
+              selectedYear: new Date().getFullYear()
+            });
+          }}
           holidays={this.state.loadedHolidays}
           events={this.state.loadedEvents}
         />

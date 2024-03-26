@@ -16,7 +16,8 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
     width: '30%',
-    height: '30%'
+    height: '30%',
+    minWidth: '300px'
   }
 };
 

@@ -7,8 +7,13 @@
   overflow: hidden;
   white-space: nowrap;
   margin: 0px 0px 3px 0px;
-  width: 50%;
+  width: 75%;
   height: 15%;
   display: inline-block;
   text-align: center;
+  box-sizing: border-box;
+}
+
+.holiday:hover {
+  background: #8cc7d6;
 }
