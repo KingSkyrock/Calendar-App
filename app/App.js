@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './App.css';
-import datejs from 'datejs'
 import Month from './month.js';
 import axios from 'axios';
 
